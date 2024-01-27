@@ -7,7 +7,17 @@ def main():
     front_cascade = cv2.CascadeClassifier('haarcascade-frontalface-default.xml')
 
     # To capture video from webcam.
-    video = cv2.VideoCapture(0)
+    if len(sys.argv) == 1:
+        video = cv2.VideoCapture(0)
+
+    #If command line argument is given thne read the file
+    else:
+        video = cv2.VideoCapture(sys.argv[1])
+
+    #Check if video is properly opened
+    if video.isOpened() == False:
+        print("Error reading video from camera or file does not exist")
+        return
 
     # To use a video file as input
     model =  load_model()
